@@ -35,6 +35,7 @@ app.get('/home', function(request,response){
             let dataP = data.map(function(isi){
                 return {
                     ...isi,
+                    isLogin,
                     duration: getDistanceTime(new Date(isi.start_date), new Date(isi.end_date))
                 }
             })

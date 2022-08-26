@@ -36,6 +36,8 @@ app.get('/home', function(request,response){
                 return {
                     ...isi,
                     isLogin,
+                    start_date: getFullTime(isi.start_date),
+                    end_date: getFullTime(isi.end_date),
                     duration: getDistanceTime(new Date(isi.start_date), new Date(isi.end_date))
                 }
             })
@@ -164,6 +166,40 @@ app.get('/delete-project/:index', function(request, response) {
     // response.redirect('/home')
 })
 
+app.get('/contact', function(request,response){
+    response.render("contact")
+})
+
+function getFullTime(time){
+
+    let month = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"]
+
+    let date = time.getDate()
+    let monthIndex = time.getMonth()
+    let year = time.getFullYear()
+
+    let hours = time.getHours()
+    let minutes = time.getMinutes()
+
+    // console.log(date);
+    // console.log(month[monthIndex]);
+    // console.log(year);
+
+    // console.log(hours);
+    // console.log(minutes);
+
+    // if(hours < 10){
+    //     hours = "0" + hours
+    // }else if(minutes < 10){
+    //     minutes = "0" + minutes
+    // }
+    
+    // 12 Agustus 2022 09.04
+    let fullTime = `${date} ${month[monthIndex]} ${year}`
+    // console.log(fullTime);
+    return fullTime
+}
+
 function getDistanceTime(startd, endd){
     let mulai = new Date(startd)
     let akhir = new Date(endd)
@@ -186,9 +222,6 @@ function getDistanceTime(startd, endd){
     
 }
 
-app.get('/contact', function(request,response){
-    response.render("contact")
-})
 
 
 app.listen(port, function(){
